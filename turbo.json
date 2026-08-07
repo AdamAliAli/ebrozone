@@ -7,6 +7,12 @@
       "inputs": ["$TURBO_DEFAULT$", ".env*"],
       "outputs": [".next/**", "!.next/cache/**", "!.next/dev/**"]
     },
+    "api#build": {
+      "dependsOn": ["^build"],
+      "inputs": ["$TURBO_DEFAULT$", ".env*"],
+      "outputs": ["dist/**"],
+      "env": ["PORT", "DATABASE_URL"]
+    },
     "lint": {
       "dependsOn": ["^lint"]
     },

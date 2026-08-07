@@ -1,5 +1,5 @@
 {
-  "name": "ebrozone-temp",
+  "name": "ebrozone",
   "private": true,
   "scripts": {
     "build": "turbo run build",
@@ -25,5 +25,9 @@
   "workspaces": [
     "apps/*",
     "packages/*"
-  ]
+  ],
+  "allowScripts": {
+    "@prisma/engines@7.9.1": true,
+    "prisma@7.9.1": true
+  }
 }
