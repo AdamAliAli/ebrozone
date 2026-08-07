@@ -64,3 +64,15 @@ model RefreshToken {
   @@index([userId])
   @@map("refresh_tokens")
 }
+
+model Course {
+  id          String    @id @default(uuid(7)) @db.Uuid
+  title       String
+  description String?
+  publishedAt DateTime?
+  deletedAt   DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@map("courses")
+}

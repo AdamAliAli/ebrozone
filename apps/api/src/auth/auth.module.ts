@@ -31,6 +31,6 @@ import { EnvConfig } from "../config/env";
     JwtStrategy,
     RolesGuard,
   ],
-  exports: [AuthService],
+  exports: [AuthService, UserRepository],
 })
 export class AuthModule {}

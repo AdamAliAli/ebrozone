@@ -1,4 +1,8 @@
-import { Injectable, UnauthorizedException } from "@nestjs/common";
+import {
+  ConflictException,
+  Injectable,
+  UnauthorizedException,
+} from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
 import { ConfigService } from "@nestjs/config";
 import { PrismaService } from "../../prisma/prisma.service";
@@ -19,6 +23,7 @@ import { EnvConfig } from "../../config/env";
 
 const REFRESH_TOKEN_TTL_MS = 30 * 24 * 60 * 60 * 1000;
 const PASSWORD_RESET_TTL_MS = 60 * 60 * 1000;
+const ACTIVATION_TTL_MS = 7 * 24 * 60 * 60 * 1000;
 
 interface AuthTokens {
   accessToken: string;
@@ -36,6 +41,41 @@ export class AuthService {
     private readonly emailService: EmailService,
     private readonly configService: ConfigService<EnvConfig, true>,
   ) {}
+
+  async issueActivation(
+    email: string,
+    role: Role,
+  ): Promise<{ id: string; email: string }> {
+    const existing = await this.userRepository.findByEmail(email);
+
+    if (existing) {
+      throw new ConflictException("A user with this email already exists.");
+    }
+
+    const rawToken = generateSecureToken();
+    const tokenHash = hashToken(rawToken);
+    const expiresAt = new Date(Date.now() + ACTIVATION_TTL_MS);
+
+    const user = await this.prisma.$transaction(async (tx) => {
+      const created = await this.userRepository.create(email, role, tx);
+      await this.authTokenRepository.create(
+        created.id,
+        tokenHash,
+        AuthTokenType.ACTIVATION,
+        expiresAt,
+        tx,
+      );
+      return created;
+    });
+
+    const frontendUrl = this.configService.get("frontendUrl", {
+      infer: true,
+    });
+    const activationUrl = `${frontendUrl}/activate-account?token=${rawToken}`;
+    await this.emailService.sendActivationEmail(user.email, activationUrl);
+
+    return { id: user.id, email: user.email };
+  }
 
   async login(dto: LoginDto): Promise<AuthTokens> {
     const user = await this.userRepository.findByEmail(dto.email);
