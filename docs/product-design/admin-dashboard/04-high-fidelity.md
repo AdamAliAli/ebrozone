@@ -96,7 +96,7 @@ Help administrators monitor business performance.
 
 Display:
 
-- User registrations
+- New enrollments
 - Consultation updates
 - Course changes
 - Administrative actions

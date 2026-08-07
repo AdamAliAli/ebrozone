@@ -98,10 +98,9 @@ Frequently asked questions about:
 # Authentication
 
 - Login
-- Register
+- Activate Account
 - Forgot Password
 - Reset Password
-- Email Verification
 
 ---
 

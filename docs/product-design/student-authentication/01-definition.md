@@ -43,6 +43,7 @@ Students should never feel confused about how to access their learning platform.
 
 Version 1 includes:
 
+- Account Activation
 - Student Login
 - Forgot Password
 - Reset Password
@@ -50,6 +51,40 @@ Version 1 includes:
 Account creation is managed by Ebro after a student enrolls.
 
 Students do not register themselves.
+
+---
+
+# Account Activation
+
+After Ebro creates a student's account, the platform sends an activation email.
+
+Activation Flow:
+
+Ebro Creates Account
+
+↓
+
+Activation Email Sent
+
+↓
+
+Student Opens Activation Link
+
+↓
+
+Student Sets Password
+
+↓
+
+Account Activated
+
+↓
+
+Redirect to Login
+
+Activation links expire automatically after a limited time, using the same secure-link mechanism as password reset.
+
+Opening the activation link and setting a password also confirms the student's email address — no separate email verification step is required.
 
 ---
 

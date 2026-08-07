@@ -161,7 +161,7 @@ Reasons:
 
 Used for:
 
-- Registration
+- Account Activation
 - Login
 - Assessment
 - Booking

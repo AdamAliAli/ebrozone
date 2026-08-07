@@ -140,11 +140,15 @@ Payment Confirmation
 
 ↓
 
-Welcome Email
+Ebro Creates the Student Account
 
 ↓
 
-Student Account Created
+Activation Email Sent
+
+↓
+
+Student Sets Password (Account Activated)
 
 ↓
 

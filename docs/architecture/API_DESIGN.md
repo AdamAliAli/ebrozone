@@ -238,7 +238,7 @@ Protect public endpoints.
 Examples:
 
 - Login
-- Registration
+- Account Activation
 - Password Reset
 - Assessment
 

@@ -10,7 +10,7 @@ The authentication system should be secure, simple, and frictionless while suppo
 
 The authentication system should:
 
-- Make registration fast.
+- Make account activation fast.
 - Keep student accounts secure.
 - Support multiple user roles.
 - Protect personal information.
@@ -30,18 +30,30 @@ In Version 1, Ebro has both the Teacher and Administrator roles.
 
 ---
 
-# Registration
+# Account Creation
 
-Students can create a free account using:
+Students do not create their own accounts.
+
+Ebro creates a student's account after a consultation, once the student decides to enroll.
+
+Account creation requires:
 
 - Full Name
 - Email Address
-- Password
+- Role
 
-Future versions may support:
+---
 
-- Google Sign-In
-- Apple Sign-In
+# Account Activation
+
+After Ebro creates the account, the platform sends an activation email to the student.
+
+Students activate their account by:
+
+- Opening the activation link
+- Setting their own password
+
+Activation links expire automatically after a limited time.
 
 ---
 
@@ -70,9 +82,9 @@ Special characters are recommended but not required.
 
 # Email Verification
 
-Version 1 requires email verification after registration.
+Email verification happens automatically during account activation.
 
-Users cannot access protected features until their email has been verified.
+Opening the activation email and setting a password confirms the student's email address — no separate verification step is required.
 
 ---
 
@@ -169,7 +181,7 @@ Students should never struggle to access their accounts.
 
 A successful authentication system ensures that:
 
-- Registration takes less than one minute.
+- Account activation takes less than one minute.
 - Accounts remain secure.
 - Users access only the features permitted by their role.
 - Password recovery is simple.

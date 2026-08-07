@@ -137,7 +137,7 @@ Protect sensitive endpoints using Redis.
 Examples:
 
 - Login
-- Registration
+- Account Activation
 - Password Reset
 - Assessment
 - Booking

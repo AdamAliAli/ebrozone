@@ -206,3 +206,19 @@ A planning document is considered complete when it provides enough clarity for a
 Perfection is not the goal.
 
 Clarity is.
+
+---
+
+## Decision #012 — Accounts Are Created By Ebro, Not Self-Registered
+
+Students do not create their own accounts.
+
+Ebro creates a student's account after a consultation, once the student decides to enroll.
+
+The platform then sends the student an activation email. The student becomes an active user by opening that email and setting their own password.
+
+This keeps enrollment personal and curated, consistent with Ebro reviewing every consultation request before someone becomes a paying student, and avoids unattended account creation from the public website.
+
+Activation links and password reset links share the same secure, expiring-link mechanism.
+
+There is no public registration page.

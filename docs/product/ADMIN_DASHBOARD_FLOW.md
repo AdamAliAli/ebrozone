@@ -91,10 +91,12 @@ Display:
 
 For each user:
 
+- Create Account (Enroll Student)
 - View Profile
 - Edit Information
-- Activate Account
+- Resend Activation Email
 - Deactivate Account
+- Reactivate Account
 - Reset Password (when necessary)
 
 ---
@@ -211,7 +213,7 @@ View important platform notifications.
 Examples:
 
 - New consultation request
-- New student registration
+- New student enrollment
 - Upcoming consultation
 - Homework submissions
 - System notifications
