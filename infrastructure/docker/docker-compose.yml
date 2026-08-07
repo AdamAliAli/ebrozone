@@ -1,0 +1,25 @@
+services:
+  postgres:
+    image: postgres:18-alpine
+    container_name: ebrozone-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-ebrozone}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-ebrozone}
+      POSTGRES_DB: ${POSTGRES_DB:-ebrozone_dev}
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - ebrozone_postgres_data:/var/lib/postgresql
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "pg_isready -U ${POSTGRES_USER:-ebrozone} -d ${POSTGRES_DB:-ebrozone_dev}",
+        ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  ebrozone_postgres_data:

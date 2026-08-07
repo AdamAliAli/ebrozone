@@ -6,7 +6,10 @@
     "dev": "turbo run dev",
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "check-types": "turbo run check-types"
+    "check-types": "turbo run check-types",
+    "db:up": "docker compose -f infrastructure/docker/docker-compose.yml up -d",
+    "db:down": "docker compose -f infrastructure/docker/docker-compose.yml down",
+    "db:logs": "docker compose -f infrastructure/docker/docker-compose.yml logs -f postgres"
   },
   "devDependencies": {
     "prettier": "^3.7.4",
