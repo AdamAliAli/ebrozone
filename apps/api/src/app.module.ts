@@ -11,6 +11,7 @@ import { ConsultationRequestModule } from "./modules/consultation-request/consul
 import { BookingModule } from "./modules/booking/booking.module";
 import { LessonModule } from "./modules/lesson/lesson.module";
 import { HomeworkModule } from "./modules/homework/homework.module";
+import { MessageModule } from "./modules/message/message.module";
 
 @Module({
   imports: [
@@ -28,6 +29,7 @@ import { HomeworkModule } from "./modules/homework/homework.module";
     BookingModule,
     LessonModule,
     HomeworkModule,
+    MessageModule,
   ],
 })
 export class AppModule {}

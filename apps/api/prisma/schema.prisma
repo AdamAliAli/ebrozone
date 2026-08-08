@@ -31,6 +31,8 @@ model User {
   bookingsAsTeacher Booking[]          @relation("BookingTeacher")
   lessonsAsStudent  Lesson[]           @relation("LessonStudent")
   lessonsAsTeacher  Lesson[]           @relation("LessonTeacher")
+  messagesSent      Message[]          @relation("MessageSender")
+  messagesReceived  Message[]          @relation("MessageRecipient")
 
   @@index([role])
   @@map("users")
@@ -216,4 +218,23 @@ model Homework {
   @@index([lessonId])
   @@index([submissionStatus])
   @@map("homeworks")
+}
+
+model Message {
+  id          String    @id @default(uuid(7)) @db.Uuid
+  senderId    String    @db.Uuid
+  recipientId String    @db.Uuid
+  body        String
+  readAt      DateTime?
+  deletedAt   DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  sender      User      @relation("MessageSender", fields: [senderId], references: [id], onDelete: Cascade)
+  recipient   User      @relation("MessageRecipient", fields: [recipientId], references: [id], onDelete: Cascade)
+
+  @@index([senderId])
+  @@index([recipientId])
+  @@index([createdAt])
+  @@map("messages")
 }
