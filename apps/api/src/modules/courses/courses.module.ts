@@ -8,5 +8,6 @@ import { CourseRepository } from "./repositories/course.repository";
   imports: [AuthModule],
   controllers: [CoursesController],
   providers: [CoursesService, CourseRepository],
+  exports: [CourseRepository],
 })
 export class CoursesModule {}
