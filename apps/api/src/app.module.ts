@@ -9,6 +9,7 @@ import { CoursesModule } from "./modules/courses/courses.module";
 import { CourseEnrollmentModule } from "./modules/course-enrollment/course-enrollment.module";
 import { ConsultationRequestModule } from "./modules/consultation-request/consultation-request.module";
 import { BookingModule } from "./modules/booking/booking.module";
+import { LessonModule } from "./modules/lesson/lesson.module";
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { BookingModule } from "./modules/booking/booking.module";
     CourseEnrollmentModule,
     ConsultationRequestModule,
     BookingModule,
+    LessonModule,
   ],
 })
 export class AppModule {}

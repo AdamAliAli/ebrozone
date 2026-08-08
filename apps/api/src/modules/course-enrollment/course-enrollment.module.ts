@@ -9,5 +9,6 @@ import { CourseEnrollmentRepository } from "./repositories/course-enrollment.rep
   imports: [AuthModule, CoursesModule],
   controllers: [CourseEnrollmentController],
   providers: [CourseEnrollmentService, CourseEnrollmentRepository],
+  exports: [CourseEnrollmentRepository],
 })
 export class CourseEnrollmentModule {}

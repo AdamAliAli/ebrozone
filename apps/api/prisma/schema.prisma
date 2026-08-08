@@ -29,6 +29,8 @@ model User {
   courseEnrollments CourseEnrollment[]
   bookingsAsStudent Booking[]          @relation("BookingStudent")
   bookingsAsTeacher Booking[]          @relation("BookingTeacher")
+  lessonsAsStudent  Lesson[]           @relation("LessonStudent")
+  lessonsAsTeacher  Lesson[]           @relation("LessonTeacher")
 
   @@index([role])
   @@map("users")
@@ -78,6 +80,7 @@ model Course {
   updatedAt   DateTime  @updatedAt
 
   courseEnrollments CourseEnrollment[]
+  lessons           Lesson[]
 
   @@map("courses")
 }
@@ -151,9 +154,42 @@ model Booking {
 
   student     User          @relation("BookingStudent", fields: [studentId], references: [id], onDelete: Cascade)
   teacher     User          @relation("BookingTeacher", fields: [teacherId], references: [id], onDelete: Cascade)
+  lesson      Lesson?
 
   @@index([studentId])
   @@index([teacherId])
   @@index([status])
   @@map("bookings")
+}
+
+enum LessonStatus {
+  PENDING
+  CONFIRMED
+  COMPLETED
+  CANCELLED
+  RESCHEDULED
+}
+
+model Lesson {
+  id         String       @id @default(uuid(7)) @db.Uuid
+  title      String
+  studentId  String       @db.Uuid
+  teacherId  String       @db.Uuid
+  bookingId  String       @db.Uuid @unique
+  courseId   String       @db.Uuid
+  lessonDate DateTime
+  status     LessonStatus @default(PENDING)
+  createdAt  DateTime     @default(now())
+  updatedAt  DateTime     @updatedAt
+
+  student    User         @relation("LessonStudent", fields: [studentId], references: [id], onDelete: Cascade)
+  teacher    User         @relation("LessonTeacher", fields: [teacherId], references: [id], onDelete: Cascade)
+  booking    Booking      @relation(fields: [bookingId], references: [id], onDelete: Cascade)
+  course     Course       @relation(fields: [courseId], references: [id], onDelete: Cascade)
+
+  @@index([studentId])
+  @@index([teacherId])
+  @@index([courseId])
+  @@index([status])
+  @@map("lessons")
 }
