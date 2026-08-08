@@ -8,5 +8,6 @@ import { MessageRepository } from "./repositories/message.repository";
   imports: [AuthModule],
   controllers: [MessageController],
   providers: [MessageService, MessageRepository],
+  exports: [MessageService],
 })
 export class MessageModule {}

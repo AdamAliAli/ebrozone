@@ -62,6 +62,12 @@ export class MessageRepository {
     return { items, total };
   }
 
+  async countUnread(): Promise<number> {
+    return this.prisma.message.count({
+      where: { readAt: null, deletedAt: null },
+    });
+  }
+
   async markAsRead(
     ids: string[],
     readAt: Date,

@@ -10,5 +10,6 @@ import { HomeworkRepository } from "./repositories/homework.repository";
   imports: [AuthModule, LessonModule, CourseEnrollmentModule],
   controllers: [HomeworkController],
   providers: [HomeworkService, HomeworkRepository],
+  exports: [HomeworkService],
 })
 export class HomeworkModule {}

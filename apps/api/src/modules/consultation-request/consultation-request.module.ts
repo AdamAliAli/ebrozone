@@ -6,5 +6,6 @@ import { ConsultationRequestRepository } from "./repositories/consultation-reque
 @Module({
   controllers: [ConsultationRequestController],
   providers: [ConsultationRequestService, ConsultationRequestRepository],
+  exports: [ConsultationRequestService],
 })
 export class ConsultationRequestModule {}

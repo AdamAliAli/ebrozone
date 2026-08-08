@@ -99,6 +99,10 @@ export class MessageService {
     };
   }
 
+  async countUnread(): Promise<number> {
+    return this.messageRepository.countUnread();
+  }
+
   async deleteMessage(id: string): Promise<void> {
     const message = await this.messageRepository.findById(id);
     if (!message) {

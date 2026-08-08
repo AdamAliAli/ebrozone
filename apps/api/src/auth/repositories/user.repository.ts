@@ -62,6 +62,10 @@ export class UserRepository {
     return { items, total };
   }
 
+  async countByRole(role: Role): Promise<number> {
+    return this.prisma.user.count({ where: { role } });
+  }
+
   async updateEmail(
     id: string,
     email: string,

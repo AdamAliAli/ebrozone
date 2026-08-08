@@ -58,6 +58,7 @@ export class ConsultationRequestService {
     const { items, total } = await this.consultationRequestRepository.findMany({
       skip: (page - 1) * limit,
       take: limit,
+      status: query.status,
     });
 
     return {

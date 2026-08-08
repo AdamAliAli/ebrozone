@@ -82,6 +82,10 @@ export class BookingService {
       studentId,
       teacherId: query.teacherId,
       status: query.status,
+      type: query.type,
+      scheduledFrom: query.from ? new Date(query.from) : undefined,
+      scheduledTo: query.to ? new Date(query.to) : undefined,
+      orderBy: query.order,
     });
 
     return {

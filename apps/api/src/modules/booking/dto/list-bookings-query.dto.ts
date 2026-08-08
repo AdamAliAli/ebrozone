@@ -1,6 +1,14 @@
 import { Type } from "class-transformer";
-import { IsEnum, IsInt, IsOptional, IsUUID, Min } from "class-validator";
-import { BookingStatus } from "../../../generated/prisma/client";
+import {
+  IsEnum,
+  IsIn,
+  IsISO8601,
+  IsInt,
+  IsOptional,
+  IsUUID,
+  Min,
+} from "class-validator";
+import { BookingStatus, BookingType } from "../../../generated/prisma/client";
 
 export class ListBookingsQueryDto {
   @IsOptional()
@@ -26,4 +34,20 @@ export class ListBookingsQueryDto {
   @IsOptional()
   @IsEnum(BookingStatus)
   status?: BookingStatus;
+
+  @IsOptional()
+  @IsEnum(BookingType)
+  type?: BookingType;
+
+  @IsOptional()
+  @IsISO8601()
+  from?: string;
+
+  @IsOptional()
+  @IsISO8601()
+  to?: string;
+
+  @IsOptional()
+  @IsIn(["asc", "desc"])
+  order?: "asc" | "desc";
 }

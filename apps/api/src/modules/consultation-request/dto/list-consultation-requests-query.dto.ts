@@ -1,5 +1,6 @@
 import { Type } from "class-transformer";
-import { IsInt, IsOptional, Min } from "class-validator";
+import { IsEnum, IsInt, IsOptional, Min } from "class-validator";
+import { ConsultationRequestStatus } from "../../../generated/prisma/client";
 
 export class ListConsultationRequestsQueryDto {
   @IsOptional()
@@ -13,4 +14,8 @@ export class ListConsultationRequestsQueryDto {
   @IsInt()
   @Min(1)
   limit?: number;
+
+  @IsOptional()
+  @IsEnum(ConsultationRequestStatus)
+  status?: ConsultationRequestStatus;
 }
