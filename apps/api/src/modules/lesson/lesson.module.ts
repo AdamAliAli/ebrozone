@@ -11,5 +11,6 @@ import { LessonRepository } from "./repositories/lesson.repository";
   imports: [AuthModule, CoursesModule, BookingModule, CourseEnrollmentModule],
   controllers: [LessonController],
   providers: [LessonService, LessonRepository],
+  exports: [LessonRepository],
 })
 export class LessonModule {}

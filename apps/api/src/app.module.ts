@@ -10,6 +10,7 @@ import { CourseEnrollmentModule } from "./modules/course-enrollment/course-enrol
 import { ConsultationRequestModule } from "./modules/consultation-request/consultation-request.module";
 import { BookingModule } from "./modules/booking/booking.module";
 import { LessonModule } from "./modules/lesson/lesson.module";
+import { HomeworkModule } from "./modules/homework/homework.module";
 
 @Module({
   imports: [
@@ -26,6 +27,7 @@ import { LessonModule } from "./modules/lesson/lesson.module";
     ConsultationRequestModule,
     BookingModule,
     LessonModule,
+    HomeworkModule,
   ],
 })
 export class AppModule {}

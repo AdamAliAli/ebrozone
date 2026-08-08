@@ -186,10 +186,34 @@ model Lesson {
   teacher    User         @relation("LessonTeacher", fields: [teacherId], references: [id], onDelete: Cascade)
   booking    Booking      @relation(fields: [bookingId], references: [id], onDelete: Cascade)
   course     Course       @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  homeworks  Homework[]
 
   @@index([studentId])
   @@index([teacherId])
   @@index([courseId])
   @@index([status])
   @@map("lessons")
+}
+
+enum HomeworkSubmissionStatus {
+  NOT_SUBMITTED
+  SUBMITTED
+  REVIEWED
+}
+
+model Homework {
+  id               String                   @id @default(uuid(7)) @db.Uuid
+  lessonId         String                   @db.Uuid
+  instructions     String
+  dueDate          DateTime
+  submissionStatus HomeworkSubmissionStatus @default(NOT_SUBMITTED)
+  teacherFeedback  String?
+  createdAt        DateTime                 @default(now())
+  updatedAt        DateTime                 @updatedAt
+
+  lesson           Lesson                   @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+
+  @@index([lessonId])
+  @@index([submissionStatus])
+  @@map("homeworks")
 }
