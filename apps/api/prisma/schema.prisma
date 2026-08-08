@@ -33,6 +33,7 @@ model User {
   lessonsAsTeacher  Lesson[]           @relation("LessonTeacher")
   messagesSent      Message[]          @relation("MessageSender")
   messagesReceived  Message[]          @relation("MessageRecipient")
+  filesUploaded     File[]
 
   @@index([role])
   @@map("users")
@@ -237,4 +238,41 @@ model Message {
   @@index([recipientId])
   @@index([createdAt])
   @@map("messages")
+}
+
+enum FileCategory {
+  HOMEWORK
+  LESSON_RESOURCE
+  STUDENT_UPLOAD
+  COURSE_MATERIAL
+}
+
+enum FileRelatedType {
+  HOMEWORK
+  LESSON
+  COURSE
+}
+
+model File {
+  id                 String           @id @default(uuid(7)) @db.Uuid
+  uploaderId         String           @db.Uuid
+  category           FileCategory
+  originalFilename   String
+  storedFilename     String
+  fileType           String
+  fileSize           Int
+  mimeType           String
+  cloudinaryPublicId String           @unique
+  secureUrl          String
+  relatedType        FileRelatedType?
+  relatedId          String?          @db.Uuid
+  createdAt          DateTime         @default(now())
+  updatedAt          DateTime         @updatedAt
+
+  uploader           User             @relation(fields: [uploaderId], references: [id], onDelete: Cascade)
+
+  @@index([uploaderId])
+  @@index([relatedType, relatedId])
+  @@index([category])
+  @@map("files")
 }

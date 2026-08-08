@@ -17,7 +17,10 @@
         "JWT_SECRET",
         "RESEND_API_KEY",
         "EMAIL_FROM",
-        "FRONTEND_URL"
+        "FRONTEND_URL",
+        "CLOUDINARY_CLOUD_NAME",
+        "CLOUDINARY_API_KEY",
+        "CLOUDINARY_API_SECRET"
       ]
     },
     "lint": {

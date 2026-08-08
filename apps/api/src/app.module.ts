@@ -3,6 +3,7 @@ import { ConfigModule } from "@nestjs/config";
 import envConfig from "./config/env";
 import { PrismaModule } from "./prisma/prisma.module";
 import { EmailModule } from "./email/email.module";
+import { CloudinaryModule } from "./cloudinary/cloudinary.module";
 import { AuthModule } from "./auth/auth.module";
 import { EnrollmentModule } from "./modules/enrollment/enrollment.module";
 import { CoursesModule } from "./modules/courses/courses.module";
@@ -13,6 +14,7 @@ import { LessonModule } from "./modules/lesson/lesson.module";
 import { HomeworkModule } from "./modules/homework/homework.module";
 import { MessageModule } from "./modules/message/message.module";
 import { DashboardModule } from "./modules/dashboard/dashboard.module";
+import { FileModule } from "./modules/file/file.module";
 
 @Module({
   imports: [
@@ -22,6 +24,7 @@ import { DashboardModule } from "./modules/dashboard/dashboard.module";
     }),
     PrismaModule,
     EmailModule,
+    CloudinaryModule,
     AuthModule,
     EnrollmentModule,
     CoursesModule,
@@ -32,6 +35,7 @@ import { DashboardModule } from "./modules/dashboard/dashboard.module";
     HomeworkModule,
     MessageModule,
     DashboardModule,
+    FileModule,
   ],
 })
 export class AppModule {}
