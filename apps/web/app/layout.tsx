@@ -1,6 +1,13 @@
 import type { Metadata } from "next";
+import { Inter } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
+
+// docs/design-system/TYPOGRAPHY.md — Inter is the official EbroZone typeface.
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+});
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -23,7 +30,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
+      <body
+        className={`${inter.variable} ${geistSans.variable} ${geistMono.variable}`}
+      >
         {children}
       </body>
     </html>

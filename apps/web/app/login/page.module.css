@@ -1,0 +1,163 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  font-family: var(--font-family);
+  color: var(--color-text-primary);
+  background: var(--color-background);
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-lg) var(--spacing-xl);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.logoLink {
+  display: flex;
+  align-items: center;
+}
+
+.backLink {
+  font-size: var(--font-size-small);
+  font-weight: var(--font-medium);
+  color: var(--color-text-secondary);
+  transition: color var(--duration-fast) var(--ease-standard);
+}
+
+.backLink:hover {
+  color: var(--color-primary);
+}
+
+.main {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: center;
+  justify-items: center;
+  gap: var(--spacing-2xl);
+  padding: var(--spacing-2xl) var(--spacing-lg);
+  max-width: var(--container-width);
+  width: 100%;
+  margin: 0 auto;
+}
+
+.welcome {
+  max-width: 480px;
+  text-align: center;
+}
+
+.welcomeHeading {
+  font-size: var(--font-size-page);
+  font-weight: var(--font-bold);
+  line-height: 1.1;
+  color: var(--color-text-primary);
+}
+
+.welcomeDescription {
+  margin-top: var(--spacing-md);
+  font-size: var(--font-size-body-lg);
+  font-weight: var(--font-regular);
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+}
+
+.formSection {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.card {
+  width: 100%;
+  max-width: 420px;
+  background: var(--color-background);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  padding: var(--spacing-lg);
+}
+
+.cardTitle {
+  font-size: var(--font-size-card-title);
+  font-weight: var(--font-semibold);
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-lg);
+}
+
+.help {
+  text-align: center;
+  padding: var(--spacing-xl) var(--spacing-lg);
+}
+
+.helpHeading {
+  font-size: var(--font-size-heading);
+  font-weight: var(--font-semibold);
+  color: var(--color-text-primary);
+}
+
+.helpText {
+  margin-top: var(--spacing-sm);
+  font-size: var(--font-size-small);
+  color: var(--color-text-secondary);
+}
+
+.footer {
+  border-top: 1px solid var(--color-border);
+  padding: var(--spacing-lg) var(--spacing-xl);
+}
+
+.footerNav {
+  display: flex;
+  justify-content: center;
+  gap: var(--spacing-lg);
+  flex-wrap: wrap;
+}
+
+.footerNav a {
+  font-size: var(--font-size-small);
+  color: var(--color-text-muted);
+  transition: color var(--duration-fast) var(--ease-standard);
+}
+
+.footerNav a:hover {
+  color: var(--color-text-secondary);
+}
+
+/* Desktop split layout — docs/product-design/student-authentication/04-high-fidelity.md */
+@media (min-width: 1024px) {
+  .main {
+    grid-template-columns: 1fr 1fr;
+    justify-items: stretch;
+    padding: var(--spacing-3xl) var(--spacing-xl);
+  }
+
+  .welcome {
+    text-align: left;
+    justify-self: end;
+  }
+
+  .formSection {
+    justify-self: start;
+  }
+}
+
+@media (max-width: 640px) {
+  .nav {
+    padding: var(--spacing-md) var(--spacing-md);
+  }
+
+  .main {
+    padding: var(--spacing-xl) var(--spacing-md);
+  }
+
+  .card {
+    padding: var(--spacing-lg) var(--spacing-md);
+  }
+
+  .welcomeHeading {
+    font-size: var(--font-size-section);
+  }
+}
