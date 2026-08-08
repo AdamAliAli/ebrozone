@@ -27,6 +27,8 @@ model User {
   authTokens        AuthToken[]
   refreshTokens     RefreshToken[]
   courseEnrollments CourseEnrollment[]
+  bookingsAsStudent Booking[]          @relation("BookingStudent")
+  bookingsAsTeacher Booking[]          @relation("BookingTeacher")
 
   @@index([role])
   @@map("users")
@@ -120,4 +122,38 @@ model ConsultationRequest {
 
   @@index([status])
   @@map("consultation_requests")
+}
+
+enum BookingType {
+  FREE_CONSULTATION
+  LIVE_CLASS
+}
+
+enum BookingStatus {
+  PENDING
+  CONFIRMED
+  COMPLETED
+  CANCELLED
+  RESCHEDULED
+}
+
+model Booking {
+  id          String        @id @default(uuid(7)) @db.Uuid
+  studentId   String        @db.Uuid
+  teacherId   String        @db.Uuid
+  type        BookingType
+  scheduledAt DateTime
+  status      BookingStatus @default(PENDING)
+  meetingLink String?
+  notes       String?
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  student     User          @relation("BookingStudent", fields: [studentId], references: [id], onDelete: Cascade)
+  teacher     User          @relation("BookingTeacher", fields: [teacherId], references: [id], onDelete: Cascade)
+
+  @@index([studentId])
+  @@index([teacherId])
+  @@index([status])
+  @@map("bookings")
 }
