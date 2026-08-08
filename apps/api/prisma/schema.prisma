@@ -97,3 +97,27 @@ model CourseEnrollment {
   @@index([courseId])
   @@map("course_enrollments")
 }
+
+enum ConsultationRequestStatus {
+  PENDING
+  CONTACTED
+  CONVERTED
+  DECLINED
+}
+
+model ConsultationRequest {
+  id                   String                    @id @default(uuid(7)) @db.Uuid
+  fullName             String
+  phone                String
+  email                String?
+  preferredContactTime String?
+  currentEnglishLevel  String?
+  learningGoal         String?
+  notes                String?
+  status               ConsultationRequestStatus @default(PENDING)
+  createdAt            DateTime                  @default(now())
+  updatedAt            DateTime                  @updatedAt
+
+  @@index([status])
+  @@map("consultation_requests")
+}

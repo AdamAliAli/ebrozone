@@ -7,6 +7,7 @@ import { AuthModule } from "./auth/auth.module";
 import { EnrollmentModule } from "./modules/enrollment/enrollment.module";
 import { CoursesModule } from "./modules/courses/courses.module";
 import { CourseEnrollmentModule } from "./modules/course-enrollment/course-enrollment.module";
+import { ConsultationRequestModule } from "./modules/consultation-request/consultation-request.module";
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { CourseEnrollmentModule } from "./modules/course-enrollment/course-enrol
     EnrollmentModule,
     CoursesModule,
     CourseEnrollmentModule,
+    ConsultationRequestModule,
   ],
 })
 export class AppModule {}
