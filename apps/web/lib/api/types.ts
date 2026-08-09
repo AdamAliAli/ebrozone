@@ -79,3 +79,12 @@ export interface StudentDashboardResponse {
     homeworkCompleted: number;
   };
 }
+
+// apps/api/src/modules/dashboard/services/dashboard.service.ts — TeacherDashboardResponse
+export interface TeacherDashboardResponse {
+  todaysSchedule: BookingResponse[];
+  upcomingLiveClasses: BookingResponse[];
+  recentStudentMessages: MessageResponse[];
+  homeworkAwaitingReview: HomeworkResponse[];
+  upcomingBookings: BookingResponse[];
+}

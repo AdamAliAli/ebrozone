@@ -71,6 +71,14 @@ export class HomeworkService {
     if (currentUser.role === Role.STUDENT) {
       lessonId = undefined;
       lessonIdIn = await this.findAccessibleLessonIds(currentUser.id);
+    } else if (currentUser.role === Role.TEACHER) {
+      const teacherLessonIds = await this.findTeacherLessonIds(currentUser.id);
+      if (lessonId) {
+        lessonIdIn = teacherLessonIds.includes(lessonId) ? [lessonId] : [];
+        lessonId = undefined;
+      } else {
+        lessonIdIn = teacherLessonIds;
+      }
     }
 
     const { items, total } = await this.homeworkRepository.findMany({
@@ -101,6 +109,8 @@ export class HomeworkService {
         homework.lesson.studentId,
         homework.lesson.courseId,
       );
+    } else if (currentUser.role === Role.TEACHER) {
+      this.assertTeacherCanAccessLesson(currentUser.id, homework.lesson.teacherId);
     }
 
     return toHomeworkResponse(homework);
@@ -153,6 +163,25 @@ export class HomeworkService {
     if (!enrollment || enrollment.deletedAt) {
       throw new ForbiddenException("You do not have access to this homework.");
     }
+  }
+
+  private assertTeacherCanAccessLesson(
+    currentUserId: string,
+    lessonTeacherId: string,
+  ): void {
+    if (lessonTeacherId !== currentUserId) {
+      throw new ForbiddenException("You do not have access to this homework.");
+    }
+  }
+
+  private async findTeacherLessonIds(teacherId: string): Promise<string[]> {
+    const { items: lessons } = await this.lessonRepository.findMany({
+      skip: 0,
+      take: MAX_LOOKUP,
+      teacherId,
+    });
+
+    return lessons.map((lesson) => lesson.id);
   }
 
   private async findAccessibleLessonIds(studentId: string): Promise<string[]> {
