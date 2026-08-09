@@ -5,7 +5,12 @@ import { Menu, X } from "lucide-react";
 import { TopNav } from "./top-nav";
 import { Sidebar } from "./sidebar";
 import { Button } from "../ui/button";
-import { STUDENT_NAV_ITEMS, TEACHER_NAV_ITEMS, type NavItem } from "./nav-items";
+import {
+  STUDENT_NAV_ITEMS,
+  TEACHER_NAV_ITEMS,
+  ADMIN_NAV_ITEMS,
+  type NavItem,
+} from "./nav-items";
 
 interface DashboardShellProps {
   role: string;
@@ -13,14 +18,21 @@ interface DashboardShellProps {
   children: ReactNode;
 }
 
-const NAV_ITEMS_BY_ROLE: Record<string, NavItem[]> = {
-  STUDENT: STUDENT_NAV_ITEMS,
-  TEACHER: TEACHER_NAV_ITEMS,
-  // ADMINISTRATOR reuses the Teacher nav when visiting /teacher — the
-  // backend itself allows ADMINISTRATOR on GET /dashboard/teacher, so an
-  // admin viewing this shell sees the same navigation a teacher would.
-  ADMINISTRATOR: TEACHER_NAV_ITEMS,
-};
+// Keyed by path, not role: an ADMINISTRATOR can reach /teacher (the
+// backend allows ADMINISTRATOR on GET /dashboard/teacher) and should see
+// the Teacher nav there, but the Admin nav on /admin.
+const NAV_ITEMS_BY_PATH_PREFIX: [string, NavItem[]][] = [
+  ["/admin", ADMIN_NAV_ITEMS],
+  ["/teacher", TEACHER_NAV_ITEMS],
+  ["/student", STUDENT_NAV_ITEMS],
+];
+
+function getNavItems(activeHref: string): NavItem[] {
+  const match = NAV_ITEMS_BY_PATH_PREFIX.find(([prefix]) =>
+    activeHref.startsWith(prefix),
+  );
+  return match ? match[1] : STUDENT_NAV_ITEMS;
+}
 
 function formatRole(role: string): string {
   return role.charAt(0) + role.slice(1).toLowerCase();
@@ -32,7 +44,7 @@ function formatRole(role: string): string {
 // nav content itself stays a plain Server Component.
 export function DashboardShell({ role, activeHref, children }: DashboardShellProps) {
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
-  const navItems = NAV_ITEMS_BY_ROLE[role] ?? STUDENT_NAV_ITEMS;
+  const navItems = getNavItems(activeHref);
 
   return (
     <div className="flex min-h-screen flex-col">

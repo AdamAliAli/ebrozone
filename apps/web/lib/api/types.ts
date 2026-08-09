@@ -19,6 +19,12 @@ export type HomeworkSubmissionStatus =
   | "SUBMITTED"
   | "REVIEWED";
 
+export type ConsultationRequestStatus =
+  | "PENDING"
+  | "CONTACTED"
+  | "CONVERTED"
+  | "DECLINED";
+
 // apps/api/src/modules/booking/services/booking.service.ts — BookingResponse
 export interface BookingResponse {
   id: string;
@@ -62,6 +68,21 @@ export interface EnrolledCourseSummary {
   enrolledAt: string;
 }
 
+// apps/api/src/modules/consultation-request/services/consultation-request.service.ts — ConsultationRequestResponse
+export interface ConsultationRequestResponse {
+  id: string;
+  fullName: string;
+  phone: string;
+  email: string | null;
+  preferredContactTime: string | null;
+  currentEnglishLevel: string | null;
+  learningGoal: string | null;
+  notes: string | null;
+  status: ConsultationRequestStatus;
+  createdAt: string;
+  updatedAt: string;
+}
+
 // apps/api/src/modules/dashboard/services/dashboard.service.ts — StudentDashboardResponse
 export interface StudentDashboardResponse {
   nextLiveClass: BookingResponse | null;
@@ -87,4 +108,15 @@ export interface TeacherDashboardResponse {
   recentStudentMessages: MessageResponse[];
   homeworkAwaitingReview: HomeworkResponse[];
   upcomingBookings: BookingResponse[];
+}
+
+// apps/api/src/modules/dashboard/services/dashboard.service.ts — AdminDashboardResponse
+export interface AdminDashboardResponse {
+  totalStudents: number;
+  activeStudents: number;
+  todaysClasses: BookingResponse[];
+  todaysConsultations: BookingResponse[];
+  newConsultationRequests: ConsultationRequestResponse[];
+  recentBookings: BookingResponse[];
+  unreadMessagesCount: number;
 }

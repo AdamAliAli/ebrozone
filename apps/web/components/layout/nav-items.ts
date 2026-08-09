@@ -10,6 +10,7 @@ import {
   Users,
   FolderOpen,
   BarChart3,
+  GraduationCap,
   type LucideIcon,
 } from "lucide-react";
 
@@ -46,4 +47,16 @@ export const TEACHER_NAV_ITEMS: NavItem[] = [
   { label: "Resources", href: "/teacher/resources", icon: FolderOpen },
   { label: "Reports", href: "/teacher/reports", icon: BarChart3 },
   { label: "Settings", href: "/teacher/settings", icon: Settings },
+];
+
+// docs/product-design/admin-dashboard/03-wireframe.md's Sidebar list.
+// Only "Dashboard" is a built page for V1 — same precedent as above.
+export const ADMIN_NAV_ITEMS: NavItem[] = [
+  { label: "Dashboard", href: "/admin", icon: LayoutDashboard },
+  { label: "Consultations", href: "/admin/consultations", icon: ClipboardList },
+  { label: "Students", href: "/admin/students", icon: Users },
+  { label: "Teachers", href: "/admin/teachers", icon: GraduationCap },
+  { label: "Courses", href: "/admin/courses", icon: BookOpen },
+  { label: "Reports", href: "/admin/reports", icon: BarChart3 },
+  { label: "Settings", href: "/admin/settings", icon: Settings },
 ];
