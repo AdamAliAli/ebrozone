@@ -74,8 +74,6 @@ export default async function LoginPage() {
 
       <footer className={styles.footer}>
         <nav className={styles.footerNav} aria-label="Footer">
-          <Link href="/privacy">Privacy Policy</Link>
-          <Link href="/terms">Terms &amp; Conditions</Link>
           <Link href="/">Contact</Link>
         </nav>
       </footer>
