@@ -141,48 +141,55 @@
   }
 }
 
-html,
-body {
-  max-width: 100vw;
-  overflow-x: hidden;
-}
-
-body {
-  color: var(--foreground);
-  background: var(--background);
-}
-
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-/* docs/design-system/ACCESSIBILITY.md — every interactive element must
-   have a visible focus indicator that is never removed. */
-:focus-visible {
-  outline: 2px solid var(--color-secondary);
-  outline-offset: 2px;
-}
-
-.imgDark {
-  display: none;
-}
-
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
+/* These base rules must live in Tailwind's own `base` layer — CSS Cascade
+   Layers give unlayered styles priority over ANY layered style regardless
+   of specificity or source order, so leaving this block unlayered was
+   silently overriding every Tailwind padding/margin utility (p-*, m-*,
+   mx-auto, etc.) site-wide. */
+@layer base {
+  html,
+  body {
+    max-width: 100vw;
+    overflow-x: hidden;
   }
 
-  .imgLight {
+  body {
+    color: var(--foreground);
+    background: var(--background);
+  }
+
+  * {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  /* docs/design-system/ACCESSIBILITY.md — every interactive element must
+     have a visible focus indicator that is never removed. */
+  :focus-visible {
+    outline: 2px solid var(--color-secondary);
+    outline-offset: 2px;
+  }
+
+  .imgDark {
     display: none;
   }
-  .imgDark {
-    display: unset;
+
+  @media (prefers-color-scheme: dark) {
+    html {
+      color-scheme: dark;
+    }
+
+    .imgLight {
+      display: none;
+    }
+    .imgDark {
+      display: unset;
+    }
   }
 }
